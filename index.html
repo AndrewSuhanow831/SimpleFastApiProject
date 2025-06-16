@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <title>main_app</title>
 
-    <form action="http://127.0.0.1:8000/submit/" method="post">
+    <form action="http://127.0.0.1:8000/submit" method="post">
         <input type="text" name="username" placeholder="Имя пользователя" required>
         <input type="password" name="password" placeholder="Пароль" required>
         <button type="submit">Отправить</button>
     </form>
+    <form action="/file/upload-file" enctype="multipart/form-data" method="post">
+        <input name="file" type="file">
+        <input type="submit">
+    </form>
+    <a href="/file/download">Скачать файл кода страницы</a>
 </head>
 <body>
 

@@ -2,7 +2,7 @@
 import json
 import os.path
 
-from fastapi import FastAPI, Form
+from fastapi import FastAPI, Form, UploadFile, File
 from starlette.responses import FileResponse, RedirectResponse
 
 from models.models import User, Feedback
@@ -129,5 +129,18 @@ def trace_example():
 
 @app.post("/submit")
 async def submit_form(username: str = Form(...), password: str = Form(...)):
-    # return {"username": username, "password_length": len(password)}
-    return RedirectResponse("index_app.html")
+    return {"username": username, "password_length": len(password)}
+    # return RedirectResponse("index_app.html")
+    # return FileResponse("index_app.html")
+
+@app.get("/file/download")
+async def download_file():
+    return FileResponse(path='index.html', filename='page_code.html', media_type='multipart/form-data')
+
+# @app.post("/file/upload-bytes")
+# def upload_file_bytes(file_bytes: bytes = File()):
+#     return {'file_bytes': str(file_bytes)}
+
+@app.post("/file/upload-file")
+def upload_file(file: UploadFile):
+    return file
